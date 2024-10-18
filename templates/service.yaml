@@ -4,12 +4,20 @@ metadata:
   name: {{ include "libhelm.fullname" . }}
   labels:
     {{- include "libhelm.labels" . | nindent 4 }}
+  annotations:
+      prometheus.io/scrape: "true"
+      prometheus.io/path: "/metrics"
+      prometheus.io/port: "2112"
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
+    - port: {{ .Values.service.metricsport }}
+      targetPort: prometheus
       protocol: TCP
-      name: http
+      name: prometheus
+    - port: {{ .Values.service.port }}
+      targetPort: grpc
+      protocol: TCP
+      name: grpc
   selector:
     {{- include "libhelm.selectorLabels" . | nindent 4 }}
