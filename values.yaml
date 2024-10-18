@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: ghcr.io/horizon-school-of-digital-technologies/library
   pullPolicy: IfNotPresent
-  tag: "20241008-020659"
+  tag: "20241018-012704"
 
 service:
   type: ClusterIP
@@ -13,17 +13,17 @@ service:
 ingress:
   enabled: true
   className: "nginx"
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+#  annotations:
+#    cert-manager.io/cluster-issuer: letsencrypt-prod
   hosts:
     - host: library.horizon-workspaces.com
       paths:
         - path: /
           pathType: ImplementationSpecific
-  tls:
-   - hosts:
-     - library.horizon-workspaces.com
-     secretName: library.horizon-workspaces.com-tls
+#  tls:
+#   - hosts:
+#     - library.horizon-workspaces.com
+#     secretName: library.horizon-workspaces.com-tls
 
 resources:
   limits:
