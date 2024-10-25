@@ -5,9 +5,9 @@ metadata:
   labels:
     {{- include "libhelm.labels" . | nindent 4 }}
   annotations:
-      prometheus.io/scrape: "true"
-      prometheus.io/path: "/metrics"
-      prometheus.io/port: "2112"
+    {{- with .Values.service.annotations }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
 spec:
   type: {{ .Values.service.type }}
   ports:
