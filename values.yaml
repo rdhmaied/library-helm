@@ -6,6 +6,10 @@ image:
   tag: "20241018-012704"
 
 service:
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/path: "/metrics"
+    prometheus.io/port: "2112"
   type: ClusterIP
   port: 50051
   metricsport: 2112
